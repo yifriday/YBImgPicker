@@ -13,10 +13,10 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0BK-pE-xpp">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePicture.png" translatesAutoresizingMaskIntoConstraints="NO" id="0BK-pE-xpp">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isChoosenN.png" translatesAutoresizingMaskIntoConstraints="NO" id="FV8-co-SBf">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isChoosenY.png" translatesAutoresizingMaskIntoConstraints="NO" id="FV8-co-SBf">
                         <rect key="frame" x="75" y="0.0" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="FV8-co-SBf" secondAttribute="height" multiplier="1:1" id="Wey-1o-7Sz"/>
@@ -43,6 +43,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="isChoosenN.png" width="25" height="25"/>
+        <image name="isChoosenY.png" width="24" height="24"/>
+        <image name="takePicture.png" width="308" height="308"/>
     </resources>
 </document>

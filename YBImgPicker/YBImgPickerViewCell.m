@@ -26,6 +26,12 @@
 - (void)setIsChoosen:(BOOL)isChoosen {
     _isChoosen = isChoosen;
     [UIView animateWithDuration:0.2 animations:^{
+        if (isChoosen) {
+            self.isChoosenImageView.image = [UIImage imageNamed:@"YBimgPickerView.bundle/isChoosenY"];
+            
+        }else {
+            self.isChoosenImageView.image = nil;
+        }
         self.isChoosenImageView.transform = CGAffineTransformMakeScale (1.1,1.1);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 animations:^{
@@ -34,12 +40,7 @@
             
         }];
     }];
-    if (isChoosen) {
-        self.isChoosenImageView.image = [UIImage imageNamed:@"YBimgPickerView.bundle/isChoosenY"];
-
-    }else {
-        self.isChoosenImageView.image = [UIImage imageNamed:@"YBimgPickerView.bundle/isChoosenN"];
-    }
+    
 }
 - (void)setIsChoosenImgHidden:(BOOL)isChoosenImgHidden {
     _isChoosenImgHidden = isChoosenImgHidden;
