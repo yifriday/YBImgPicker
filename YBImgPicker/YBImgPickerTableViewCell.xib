@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="YBImgPickerTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRb-Qa-d1J">
+                        <rect key="frame" x="72" y="32" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dat-np-QxD">
+                        <rect key="frame" x="80" y="32" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G2F-Te-Sos">
+                        <rect key="frame" x="8" y="3" width="56" height="58"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="58" id="lYf-Qs-Gyr"/>
+                            <constraint firstAttribute="width" constant="56" id="lp8-OE-wlb"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hRb-Qa-d1J" firstAttribute="leading" secondItem="G2F-Te-Sos" secondAttribute="trailing" constant="8" id="NHI-Wc-rfN"/>
+                    <constraint firstItem="Dat-np-QxD" firstAttribute="bottom" secondItem="hRb-Qa-d1J" secondAttribute="bottom" id="RuX-em-InK"/>
+                    <constraint firstItem="Dat-np-QxD" firstAttribute="leading" secondItem="hRb-Qa-d1J" secondAttribute="trailing" constant="8" id="WK2-sa-Nix"/>
+                    <constraint firstItem="G2F-Te-Sos" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="c6B-qM-WV9"/>
+                    <constraint firstAttribute="centerY" secondItem="hRb-Qa-d1J" secondAttribute="centerY" id="ch5-FY-4Rh"/>
+                    <constraint firstAttribute="centerY" secondItem="G2F-Te-Sos" secondAttribute="centerY" id="uiS-Bm-x7l"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="albumImageView" destination="G2F-Te-Sos" id="LuU-tg-3Aa"/>
+                <outlet property="numLabel" destination="Dat-np-QxD" id="qGm-Mn-OPJ"/>
+                <outlet property="titleLabel" destination="hRb-Qa-d1J" id="u5B-1C-X8V"/>
+            </connections>
+            <point key="canvasLocation" x="268" y="249"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,41 @@
+//
+//  PrefixHeader.pch
+//  BoleAsk
+//
+//  Created by songyixing on 15/5/9.
+//  Copyright (c) 2015年 Yunbix. All rights reserved.
+//
+
+#import <Availability.h>
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "YBPreHelper.h"
+#import "PreHelper.h"
+#import "YBImageLoader.h"
+#import "YBView.h"
+#import "YBData.h"
+#import "YBNetWoker.h"
+#import "GlobalDefine.h"
+#import "UsersDefine.h"
+#import "GlobalState.h"
+#import "YBException.h"
+#import "UIViewController+DismissKeyboard.h"
+
+//#define API_HTTP_HOST "http://01.rd.yunbix.cn/aideboleapp/"
+#define API_HTTP_HOST "http://api.aidebole.com/aideboleapp/"
+
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+#define is_IOS_7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define is_IOS_8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+
+
+
+#define MR_SHORTHAND
+#endif

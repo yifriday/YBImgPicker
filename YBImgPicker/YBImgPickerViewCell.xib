@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="YBImgPickerViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0BK-pE-xpp">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isChoosenN.png" translatesAutoresizingMaskIntoConstraints="NO" id="FV8-co-SBf">
+                        <rect key="frame" x="75" y="0.0" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="FV8-co-SBf" secondAttribute="height" multiplier="1:1" id="Wey-1o-7Sz"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0BK-pE-xpp" secondAttribute="trailing" id="Bvx-RE-XWk"/>
+                <constraint firstItem="FV8-co-SBf" firstAttribute="width" secondItem="0BK-pE-xpp" secondAttribute="height" multiplier="25:100" id="FDd-EE-zG3"/>
+                <constraint firstAttribute="bottom" secondItem="0BK-pE-xpp" secondAttribute="bottom" id="MKa-Nj-Y2E"/>
+                <constraint firstAttribute="trailing" secondItem="FV8-co-SBf" secondAttribute="trailing" id="MgW-TW-agc"/>
+                <constraint firstItem="FV8-co-SBf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hXn-Q0-tgb"/>
+                <constraint firstItem="0BK-pE-xpp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kZP-3H-Gts"/>
+                <constraint firstItem="0BK-pE-xpp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kiC-Y8-7aZ"/>
+            </constraints>
+            <size key="customSize" width="97" height="96"/>
+            <connections>
+                <outlet property="isChoosenImageView" destination="FV8-co-SBf" id="exf-wD-hAD"/>
+                <outlet property="mainImageView" destination="0BK-pE-xpp" id="qYW-kz-C9Y"/>
+            </connections>
+            <point key="canvasLocation" x="200" y="324"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="isChoosenN.png" width="25" height="25"/>
+    </resources>
+</document>
