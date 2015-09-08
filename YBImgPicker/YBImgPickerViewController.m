@@ -22,7 +22,7 @@ const NSInteger photoCount = 9;
     NSMutableArray * tableData;
     NSMutableArray * colletionData;
     NSMutableArray * originImgData;
-    NSMutableArray * choosenImgArray;
+    NSMutableDictionary * choosenImgArray;
     NSMutableDictionary * isChoosenDic;
     NSInteger choosenCount;
     BOOL isShowTable;
@@ -52,8 +52,9 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     colletionData = [[NSMutableArray alloc]init];
     originImgData = [[NSMutableArray alloc]init];
     assetsLibrary = [[ALAssetsLibrary alloc]init];
-    choosenImgArray = [[NSMutableArray alloc]init];
+    choosenImgArray = [[NSMutableDictionary alloc]init];
     isChoosenDic = [[NSMutableDictionary alloc]init];
+    choosenCount = 0;
     [self getTableDate];
     [self initDefaultView];
     return self;
@@ -218,7 +219,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
-        if (choosenImgArray.count >= photoCount) {
+        if (choosenCount >= photoCount) {
             return;
         }
         UIImagePickerController * imagePicker = [[UIImagePickerController alloc]init];
@@ -228,25 +229,22 @@ static NSString * const tableReuseIdentifier = @"tableCell";
         [self presentViewController:imagePicker animated:YES completion:nil];
         
     }else {
-        
+
         NSInteger  tag = indexPath.item - 1;
+        
         NSMutableArray * isChoosenArray = [isChoosenDic objectForKey:[group valueForProperty:ALAssetsGroupPropertyName]];
         BOOL isChoosen = [[isChoosenArray objectAtIndex:tag]boolValue];
-        [isChoosenArray replaceObjectAtIndex:tag withObject:[NSNumber numberWithBool:!isChoosen]];
-        [isChoosenDic setObject:isChoosenArray forKey:[group valueForProperty:ALAssetsGroupPropertyName]];
         ALAsset * asset = [originImgData objectAtIndex:tag];
         
         if (!isChoosen) {
-            if (choosenImgArray.count >= photoCount) {
+            if (choosenCount >= photoCount) {
                 return;
             }
             choosenCount += 1;
-            [choosenImgArray addObject:asset];
+            [choosenImgArray setObject:asset forKey:indexPath];
         }else {
-            if ([choosenImgArray containsObject:asset]) {
                 choosenCount -= 1;
-                [choosenImgArray removeObject:asset];
-            }
+            [choosenImgArray removeObjectForKey:indexPath];
         }
         self.navigationItem.rightBarButtonItem.title = rightItemTitle;
         if (choosenImgArray.count) {
@@ -254,7 +252,12 @@ static NSString * const tableReuseIdentifier = @"tableCell";
         }else {
             self.navigationItem.rightBarButtonItem.enabled = NO;
         }
+        
+        [isChoosenArray replaceObjectAtIndex:tag withObject:[NSNumber numberWithBool:!isChoosen]];
+        [isChoosenDic setObject:isChoosenArray forKey:[group valueForProperty:ALAssetsGroupPropertyName]];
+        
         [collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        
     }
 }
 #pragma mark UITableView
@@ -289,7 +292,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
             UIImageWriteToSavedPhotosAlbum(image,self,nil, NULL);
-            [choosenImgArray addObject:image];
+            [choosenImgArray setObject:image forKey:@"camare"];
         }
         
         [picker dismissViewControllerAnimated:NO completion:^() {
@@ -314,15 +317,16 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 }
 - (void)save {
     [self dismissViewControllerAnimated:YES completion:^{
-        for (int i = 0; i<choosenImgArray.count; i++) {
-            ALAsset * asset = [choosenImgArray objectAtIndex:i];
+        NSMutableArray * resuletData = [NSMutableArray arrayWithArray:[choosenImgArray allValues]];
+        for (int i = 0; i<resuletData.count; i++) {
+            ALAsset * asset = [resuletData objectAtIndex:i];
             if ([asset isKindOfClass:[ALAsset class]]) {
                 UIImage * image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
-                [choosenImgArray replaceObjectAtIndex:i withObject:image];
+                [resuletData replaceObjectAtIndex:i withObject:image];
             }
         }
         if ([self.delegate respondsToSelector:@selector(YBImagePickerDidFinishWithImages:)]) {
-            [self.delegate YBImagePickerDidFinishWithImages:choosenImgArray];
+            [self.delegate YBImagePickerDidFinishWithImages:resuletData];
         }
     }];
 }
