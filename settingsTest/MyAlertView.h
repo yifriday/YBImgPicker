@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyAlertView : UIWindow
-
+@interface MyAlertView : UIWindow {
+    UILabel * label;
+}
+- (void)showStatusMessage:(NSString *)message;
+- (void)hide;
 @end

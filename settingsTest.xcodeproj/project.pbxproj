@@ -7,13 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D2585D81B8C4AC500D6522F /* TestBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2585D71B8C4AC500D6522F /* TestBtn.m */; };
+		3D2585EF1B8C6A9F00D6522F /* Guide-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2585EC1B8C6A9F00D6522F /* Guide-1.png */; };
+		3D2585F01B8C6A9F00D6522F /* Guide-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2585ED1B8C6A9F00D6522F /* Guide-2.png */; };
+		3D2585F11B8C6A9F00D6522F /* Guide-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2585EE1B8C6A9F00D6522F /* Guide-3.png */; };
+		3D49DA8F1B74BAFC00CCB562 /* IPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D49DA8E1B74BAFC00CCB562 /* IPHelper.m */; };
+		3D657EAC1B8AF92C00A1F05C /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D657EAB1B8AF92C00A1F05C /* MyAlertView.m */; };
+		3D8074BC1B8F09AC0041B1DF /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8074BB1B8F09AC0041B1DF /* ViewController.xib */; };
 		3D845F9C1B7482890083FC52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D845F9B1B7482890083FC52 /* main.m */; };
 		3D845F9F1B7482890083FC52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D845F9E1B7482890083FC52 /* AppDelegate.m */; };
 		3D845FA21B7482890083FC52 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D845FA11B7482890083FC52 /* ViewController.m */; };
-		3D845FA51B7482890083FC52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D845FA31B7482890083FC52 /* Main.storyboard */; };
 		3D845FA71B7482890083FC52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D845FA61B7482890083FC52 /* Images.xcassets */; };
 		3D845FAA1B7482890083FC52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D845FA81B7482890083FC52 /* LaunchScreen.xib */; };
 		3D845FB61B7482890083FC52 /* settingsTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D845FB51B7482890083FC52 /* settingsTestTests.m */; };
+		3D845FC01B7482A80083FC52 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3D845FBF1B7482A80083FC52 /* Settings.bundle */; };
+		3D856F0A1B9E1167004A47A3 /* YBImgPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D856F011B9E1167004A47A3 /* YBImgPickerTableViewCell.m */; };
+		3D856F0C1B9E1167004A47A3 /* YBimgPickerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F031B9E1167004A47A3 /* YBimgPickerView.bundle */; };
+		3D856F0D1B9E1167004A47A3 /* YBImgPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D856F051B9E1167004A47A3 /* YBImgPickerViewCell.m */; };
+		3D856F0F1B9E1167004A47A3 /* YBImgPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D856F081B9E1167004A47A3 /* YBImgPickerViewController.m */; };
+		3D856F1A1B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F171B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib */; };
+		3D856F1B1B9E12AA004A47A3 /* YBImgPickerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F181B9E12AA004A47A3 /* YBImgPickerViewCell.xib */; };
+		3D856F1C1B9E12AA004A47A3 /* YBImgPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F191B9E12AA004A47A3 /* YBImgPickerViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +41,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D2585D61B8C4AC500D6522F /* TestBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBtn.h; sourceTree = "<group>"; };
+		3D2585D71B8C4AC500D6522F /* TestBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestBtn.m; sourceTree = "<group>"; };
+		3D2585EC1B8C6A9F00D6522F /* Guide-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Guide-1.png"; sourceTree = "<group>"; };
+		3D2585ED1B8C6A9F00D6522F /* Guide-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Guide-2.png"; sourceTree = "<group>"; };
+		3D2585EE1B8C6A9F00D6522F /* Guide-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Guide-3.png"; sourceTree = "<group>"; };
+		3D49DA8D1B74BAFC00CCB562 /* IPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPHelper.h; sourceTree = "<group>"; };
+		3D49DA8E1B74BAFC00CCB562 /* IPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPHelper.m; sourceTree = "<group>"; };
+		3D657EAA1B8AF92C00A1F05C /* MyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertView.h; sourceTree = "<group>"; };
+		3D657EAB1B8AF92C00A1F05C /* MyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertView.m; sourceTree = "<group>"; };
+		3D8074BB1B8F09AC0041B1DF /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		3D845F961B7482890083FC52 /* settingsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = settingsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D845F9A1B7482890083FC52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D845F9B1B7482890083FC52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -34,12 +58,22 @@
 		3D845F9E1B7482890083FC52 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3D845FA01B7482890083FC52 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3D845FA11B7482890083FC52 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3D845FA41B7482890083FC52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D845FA61B7482890083FC52 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3D845FA91B7482890083FC52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3D845FAF1B7482890083FC52 /* settingsTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = settingsTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D845FB41B7482890083FC52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D845FB51B7482890083FC52 /* settingsTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = settingsTestTests.m; sourceTree = "<group>"; };
+		3D845FBF1B7482A80083FC52 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		3D856F001B9E1167004A47A3 /* YBImgPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerTableViewCell.h; sourceTree = "<group>"; };
+		3D856F011B9E1167004A47A3 /* YBImgPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerTableViewCell.m; sourceTree = "<group>"; };
+		3D856F031B9E1167004A47A3 /* YBimgPickerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YBimgPickerView.bundle; sourceTree = "<group>"; };
+		3D856F041B9E1167004A47A3 /* YBImgPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerViewCell.h; sourceTree = "<group>"; };
+		3D856F051B9E1167004A47A3 /* YBImgPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerViewCell.m; sourceTree = "<group>"; };
+		3D856F071B9E1167004A47A3 /* YBImgPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerViewController.h; sourceTree = "<group>"; };
+		3D856F081B9E1167004A47A3 /* YBImgPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerViewController.m; sourceTree = "<group>"; };
+		3D856F171B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerTableViewCell.xib; sourceTree = "<group>"; };
+		3D856F181B9E12AA004A47A3 /* YBImgPickerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerViewCell.xib; sourceTree = "<group>"; };
+		3D856F191B9E12AA004A47A3 /* YBImgPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +97,7 @@
 		3D845F8D1B7482890083FC52 = {
 			isa = PBXGroup;
 			children = (
+				3D856EFF1B9E1167004A47A3 /* YBImgPicker */,
 				3D845F981B7482890083FC52 /* settingsTest */,
 				3D845FB21B7482890083FC52 /* settingsTestTests */,
 				3D845F971B7482890083FC52 /* Products */,
@@ -81,14 +116,24 @@
 		3D845F981B7482890083FC52 /* settingsTest */ = {
 			isa = PBXGroup;
 			children = (
+				3D2585EC1B8C6A9F00D6522F /* Guide-1.png */,
+				3D2585ED1B8C6A9F00D6522F /* Guide-2.png */,
+				3D2585EE1B8C6A9F00D6522F /* Guide-3.png */,
 				3D845F9D1B7482890083FC52 /* AppDelegate.h */,
 				3D845F9E1B7482890083FC52 /* AppDelegate.m */,
 				3D845FA01B7482890083FC52 /* ViewController.h */,
 				3D845FA11B7482890083FC52 /* ViewController.m */,
-				3D845FA31B7482890083FC52 /* Main.storyboard */,
+				3D8074BB1B8F09AC0041B1DF /* ViewController.xib */,
+				3D845FBF1B7482A80083FC52 /* Settings.bundle */,
 				3D845FA61B7482890083FC52 /* Images.xcassets */,
 				3D845FA81B7482890083FC52 /* LaunchScreen.xib */,
 				3D845F991B7482890083FC52 /* Supporting Files */,
+				3D49DA8D1B74BAFC00CCB562 /* IPHelper.h */,
+				3D49DA8E1B74BAFC00CCB562 /* IPHelper.m */,
+				3D657EAA1B8AF92C00A1F05C /* MyAlertView.h */,
+				3D657EAB1B8AF92C00A1F05C /* MyAlertView.m */,
+				3D2585D61B8C4AC500D6522F /* TestBtn.h */,
+				3D2585D71B8C4AC500D6522F /* TestBtn.m */,
 			);
 			path = settingsTest;
 			sourceTree = "<group>";
@@ -117,6 +162,23 @@
 				3D845FB41B7482890083FC52 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3D856EFF1B9E1167004A47A3 /* YBImgPicker */ = {
+			isa = PBXGroup;
+			children = (
+				3D856F171B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib */,
+				3D856F181B9E12AA004A47A3 /* YBImgPickerViewCell.xib */,
+				3D856F191B9E12AA004A47A3 /* YBImgPickerViewController.xib */,
+				3D856F001B9E1167004A47A3 /* YBImgPickerTableViewCell.h */,
+				3D856F011B9E1167004A47A3 /* YBImgPickerTableViewCell.m */,
+				3D856F031B9E1167004A47A3 /* YBimgPickerView.bundle */,
+				3D856F041B9E1167004A47A3 /* YBImgPickerViewCell.h */,
+				3D856F051B9E1167004A47A3 /* YBImgPickerViewCell.m */,
+				3D856F071B9E1167004A47A3 /* YBImgPickerViewController.h */,
+				3D856F081B9E1167004A47A3 /* YBImgPickerViewController.m */,
+			);
+			path = YBImgPicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,9 +261,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D845FA51B7482890083FC52 /* Main.storyboard in Resources */,
+				3D2585F01B8C6A9F00D6522F /* Guide-2.png in Resources */,
+				3D8074BC1B8F09AC0041B1DF /* ViewController.xib in Resources */,
+				3D845FC01B7482A80083FC52 /* Settings.bundle in Resources */,
+				3D2585F11B8C6A9F00D6522F /* Guide-3.png in Resources */,
+				3D856F0C1B9E1167004A47A3 /* YBimgPickerView.bundle in Resources */,
 				3D845FAA1B7482890083FC52 /* LaunchScreen.xib in Resources */,
+				3D2585EF1B8C6A9F00D6522F /* Guide-1.png in Resources */,
 				3D845FA71B7482890083FC52 /* Images.xcassets in Resources */,
+				3D856F1C1B9E12AA004A47A3 /* YBImgPickerViewController.xib in Resources */,
+				3D856F1A1B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib in Resources */,
+				3D856F1B1B9E12AA004A47A3 /* YBImgPickerViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,9 +289,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D856F0A1B9E1167004A47A3 /* YBImgPickerTableViewCell.m in Sources */,
+				3D2585D81B8C4AC500D6522F /* TestBtn.m in Sources */,
+				3D657EAC1B8AF92C00A1F05C /* MyAlertView.m in Sources */,
 				3D845FA21B7482890083FC52 /* ViewController.m in Sources */,
 				3D845F9F1B7482890083FC52 /* AppDelegate.m in Sources */,
+				3D49DA8F1B74BAFC00CCB562 /* IPHelper.m in Sources */,
+				3D856F0D1B9E1167004A47A3 /* YBImgPickerViewCell.m in Sources */,
 				3D845F9C1B7482890083FC52 /* main.m in Sources */,
+				3D856F0F1B9E1167004A47A3 /* YBImgPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,14 +320,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3D845FA31B7482890083FC52 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3D845FA41B7482890083FC52 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3D845FA81B7482890083FC52 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -347,8 +415,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = settingsTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(PROJECT_DIR)/settingsTest/YBLib/LevelDB",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -357,8 +433,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = settingsTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(PROJECT_DIR)/settingsTest/YBLib/LevelDB",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -416,6 +500,7 @@
 				3D845FBB1B7482890083FC52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D845FBC1B7482890083FC52 /* Build configuration list for PBXNativeTarget "settingsTestTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +509,7 @@
 				3D845FBE1B7482890083FC52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

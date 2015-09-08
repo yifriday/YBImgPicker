@@ -31,6 +31,7 @@ const NSInteger photoCount = 9;
 @property (nonatomic , strong) IBOutlet UITableView * myTableView;
 @property (nonatomic , strong) IBOutlet UIView * backView;
 @property (nonatomic , strong) UINavigationController *nav;
+@property (nonatomic , strong) UIButton * titleBtn;
 @property (nonatomic , strong) id <YBImgPickerViewControllerDelegate> delegate;
 @property (nonatomic , strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic , strong) ALAssetsGroup * group;
@@ -38,7 +39,7 @@ const NSInteger photoCount = 9;
 @end
 
 @implementation YBImgPickerViewController
-@synthesize myTableView,myCollectionView,backView;
+@synthesize myTableView,myCollectionView,backView,titleBtn;
 @synthesize assetsLibrary,group;
 @synthesize nav;
 static NSString * const colletionReuseIdentifier = @"collectionCell";
@@ -72,10 +73,9 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     //naviegationBar
     self.view.frame = [UIScreen mainScreen].bounds;
     self.navigationItem.titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-    UIButton * titleBtn = [[UIButton alloc]initWithFrame:self.navigationItem.titleView.frame];
+     titleBtn = [[UIButton alloc]initWithFrame:self.navigationItem.titleView.frame];
     [titleBtn setTitle:@"相册胶卷" forState:UIControlStateNormal];
     [titleBtn setImage:[UIImage imageNamed:@"YBimgPickerView.bundle/arrow"] forState:UIControlStateNormal];
-    
     [titleBtn setTitleColor:self.navigationController.navigationBar.tintColor forState:UIControlStateNormal];
     [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 78, 0, 0)];
     [titleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
@@ -104,10 +104,8 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     //backView
     isShowTable = NO;
     backView.alpha = 0;
-    backView.hidden = !isShowTable;
     UITapGestureRecognizer * backViewTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showTableView)];
     [backView addGestureRecognizer:backViewTap];
-    backView.userInteractionEnabled = YES;
 }
 - (void)setTableViewHeight {
     for(NSLayoutConstraint * constraint in myTableView.constraints){
@@ -330,34 +328,54 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 }
 - (void)showTableView {
     myTableView.hidden = NO;
+    backView.userInteractionEnabled = YES;
     if (isShowTable) {
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.45 animations:^{
             for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
                 if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-                    constraint.constant = -tableH;
+                    constraint.constant += 5;
                 }
             }
-            backView.hidden = isShowTable;
             backView.alpha = 0;
-            
             [self.view layoutIfNeeded];
             
         } completion:^(BOOL finished) {
-            isShowTable = !isShowTable;
+            titleBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+            [UIView animateWithDuration:0.35 animations:^{
+                for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
+                    if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
+                        constraint.constant = -tableH;
+                    }
+                }
+                [self.view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                backView.userInteractionEnabled = NO;
+                isShowTable = !isShowTable;
+            }];
         }];
     }else {
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.45 animations:^{
             for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
                 if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-                    constraint.constant = 64;
+                    constraint.constant = 64 + 5;
                 }
             }
             backView.alpha = 1;
-            backView.hidden = isShowTable;
             [self.view layoutIfNeeded];
             
         } completion:^(BOOL finished) {
-            isShowTable = !isShowTable;
+            titleBtn.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+            [UIView animateWithDuration:0.35 animations:^{
+                for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
+                    if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
+                        constraint.constant = 64;
+                    }
+                }
+                [self.view layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                backView.userInteractionEnabled = YES;
+                isShowTable = !isShowTable;
+            }];
         }];
     }
 }
@@ -372,6 +390,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     myTableView = nil;
     backView = nil;
     nav = nil;
+    titleBtn = nil;
     _delegate = nil;
     assetsLibrary = nil;
     group = nil;

@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TestBtn.h"
+@interface ViewController : UIViewController {
+    IBOutlet TestBtn * getIPBtn;
+    IBOutlet UILabel * iPLable;
+    IBOutlet UIImageView * imageView;
 
-@interface ViewController : UIViewController
-
+}
 
 @end
 

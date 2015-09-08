@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface IPHelper : NSObject
-
++ (NSString *)getIPAddress:(BOOL)preferIPv4;
++ (NSDictionary *)getIPAddresses;
 @end
