@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "IPHelper.h"
-#import "MyAlertView.h"
 #import "YBImgPickerViewController.h"
 @interface ViewController ()<YBImgPickerViewControllerDelegate>{
 }
@@ -27,9 +26,6 @@
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     iPLable.text = [IPHelper getIPAddress:YES];
-    MyAlertView * labelwindow = [[MyAlertView alloc]initWithFrame:[UIApplication sharedApplication].statusBarFrame];
-    [labelwindow showStatusMessage:iPLable.text];
-    [labelwindow hide];
 }
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
