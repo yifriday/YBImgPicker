@@ -340,7 +340,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     [self dismissViewControllerAnimated:YES completion:^{
         
         if ([self.delegate respondsToSelector:@selector(YBImagePickerDidFinishWithImages:)]) {
-            [self.delegate YBImagePickerDidFinishWithImages:choosenImgArray.mutableCopy];
+            [self.delegate YBImagePickerDidFinishWithImages:choosenImgArray.copy];
         }
         
         
