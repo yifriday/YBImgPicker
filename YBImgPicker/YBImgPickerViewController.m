@@ -9,15 +9,14 @@
 #define maxnum_of_one_line 3
 #define itemHeight ( CGRectGetWidth([UIScreen mainScreen].bounds) - (maxnum_of_one_line + 1) * empty_width ) / maxnum_of_one_line
 #define item_Size CGSizeMake(itemHeight , itemHeight)
-#define rightItemTitle [NSString stringWithFormat:@"完成 %ld/%ld",(long)choosenCount,(long)photoCount]
+#define rightItemTitle [NSString stringWithFormat:@"完成 %ld/%ld",(long)choosenCount,(long)photoCounts]
 #define tableCellH 70
-#define tableH MIN(CGRectGetWidth([UIScreen mainScreen].bounds) - 64, tableCellH * tableData.count);
-
+#define tableH MIN(CGRectGetHeight([UIScreen mainScreen].bounds) - 64, tableCellH * tableData.count);
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "YBImgPickerViewController.h"
 #import "YBImgPickerViewCell.h"
 #import "YBImgPickerTableViewCell.h"
-const NSInteger photoCount = 9;
+const NSInteger photoCounts = 9;
 @interface YBImgPickerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
     NSMutableArray * tableData;
     NSMutableArray * colletionData;
@@ -26,6 +25,7 @@ const NSInteger photoCount = 9;
     NSMutableDictionary * isChoosenDic;
     NSInteger choosenCount;
     BOOL isShowTable;
+    UIViewController * preVC;
 }
 @property (nonatomic , strong) IBOutlet UICollectionView * myCollectionView;
 @property (nonatomic , strong) IBOutlet UITableView * myTableView;
@@ -59,12 +59,29 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     [self initDefaultView];
     return self;
 }
+
+// 第一次进来的时候显示已经存在的图片个数
+- (instancetype)initWithNumber:(NSInteger)number {
+    self = [self initWithNibName:@"YBImgPickerViewController" bundle:nil];
+    nav = [[UINavigationController alloc] initWithRootViewController:self];
+    
+    tableData = [[NSMutableArray alloc]init];
+    colletionData = [[NSMutableArray alloc]init];
+    originImgData = [[NSMutableArray alloc]init];
+    assetsLibrary = [[ALAssetsLibrary alloc]init];
+    choosenImgArray = [[NSMutableDictionary alloc]init];
+    isChoosenDic = [[NSMutableDictionary alloc]init];
+    choosenCount = number;
+    [self getTableDate];
+    [self initDefaultView];
+    return self;
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationItem.rightBarButtonItem.title = rightItemTitle;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Register cell classes
     [myCollectionView registerNib:[UINib nibWithNibName:@"YBImgPickerViewCell" bundle:nil] forCellWithReuseIdentifier:colletionReuseIdentifier];
     [myTableView registerNib:[UINib nibWithNibName:@"YBImgPickerTableViewCell" bundle:nil] forCellReuseIdentifier:tableReuseIdentifier];
@@ -74,12 +91,16 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     //naviegationBar
     self.view.frame = [UIScreen mainScreen].bounds;
     self.navigationItem.titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
-     titleBtn = [[UIButton alloc]initWithFrame:self.navigationItem.titleView.frame];
-    [titleBtn setTitle:@"相册胶卷" forState:UIControlStateNormal];
+    titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleBtn setTitle:@"相机胶卷" forState:UIControlStateNormal];
+    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [titleBtn setImage:[UIImage imageNamed:@"YBimgPickerView.bundle/arrow"] forState:UIControlStateNormal];
-    [titleBtn setTitleColor:self.navigationController.navigationBar.tintColor forState:UIControlStateNormal];
     [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 78, 0, 0)];
     [titleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
+    [titleBtn setFrame:self.navigationItem.titleView.frame];
+    [titleBtn sizeToFit];
+    titleBtn.center = self.navigationItem.titleView.center;
+    
     [titleBtn addTarget:self action:@selector(showTableView) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem.titleView addSubview:titleBtn];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(hide)];
@@ -94,7 +115,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     //collectionView
     UICollectionViewFlowLayout * mycollectionViewLayout = [[UICollectionViewFlowLayout alloc]init];
     mycollectionViewLayout.minimumInteritemSpacing = empty_width;
-    mycollectionViewLayout.minimumLineSpacing = empty_width + 2;
+    mycollectionViewLayout.minimumLineSpacing = empty_width;
     mycollectionViewLayout.itemSize = item_Size;
     mycollectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     mycollectionViewLayout.sectionInset = UIEdgeInsetsMake(empty_width + 2, empty_width , empty_width + 2, empty_width);
@@ -175,7 +196,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
             if (result) {
                 NSString *type=[result valueForProperty:ALAssetPropertyType];
                 if ([type isEqualToString:ALAssetTypePhoto]) {
-                    [colletionData addObject:[UIImage imageWithCGImage:[result thumbnail]]];
+                    [colletionData addObject:[UIImage imageWithCGImage:[result aspectRatioThumbnail]]];
                     [originImgData addObject:result];
                 }
                 [myCollectionView reloadData];
@@ -219,7 +240,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
-        if (choosenCount >= photoCount) {
+        if (choosenCount >= photoCounts) {
             return;
         }
         UIImagePickerController * imagePicker = [[UIImagePickerController alloc]init];
@@ -229,7 +250,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
         [self presentViewController:imagePicker animated:YES completion:nil];
         
     }else {
-
+        
         NSInteger  tag = indexPath.item - 1;
         
         NSMutableArray * isChoosenArray = [isChoosenDic objectForKey:[group valueForProperty:ALAssetsGroupPropertyName]];
@@ -237,13 +258,13 @@ static NSString * const tableReuseIdentifier = @"tableCell";
         ALAsset * asset = [originImgData objectAtIndex:tag];
         
         if (!isChoosen) {
-            if (choosenCount >= photoCount) {
+            if (choosenCount >= photoCounts) {
                 return;
             }
             choosenCount += 1;
             [choosenImgArray setObject:asset forKey:indexPath];
         }else {
-                choosenCount -= 1;
+            choosenCount -= 1;
             [choosenImgArray removeObjectForKey:indexPath];
         }
         self.navigationItem.rightBarButtonItem.title = rightItemTitle;
@@ -282,17 +303,17 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     [self showTableView];
     
 }
-#pragma mark imagePicker 
+#pragma mark imagePicker
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = [[UIImage alloc]init];
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (image) {
-        
+
         // 保存图片到相册中
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
             UIImageWriteToSavedPhotosAlbum(image,self,nil, NULL);
-            [choosenImgArray setObject:image forKey:@"camare"];
+            [choosenImgArray setObject:[self fixOrientation:image] forKey:@"camare"];
         }
         
         [picker dismissViewControllerAnimated:NO completion:^() {
@@ -304,7 +325,7 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 
 #pragma mark self
 - (void)showInViewContrller:(UIViewController *)vc choosenNum:(NSInteger)choosenNum delegate:(id<YBImgPickerViewControllerDelegate>)vcdelegate{
-    
+    preVC = vc;
     self.delegate = vcdelegate;
     choosenCount = choosenNum;
     
@@ -317,17 +338,12 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 }
 - (void)save {
     [self dismissViewControllerAnimated:YES completion:^{
-        NSMutableArray * resuletData = [NSMutableArray arrayWithArray:[choosenImgArray allValues]];
-        for (int i = 0; i<resuletData.count; i++) {
-            ALAsset * asset = [resuletData objectAtIndex:i];
-            if ([asset isKindOfClass:[ALAsset class]]) {
-                UIImage * image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
-                [resuletData replaceObjectAtIndex:i withObject:image];
-            }
-        }
+        
         if ([self.delegate respondsToSelector:@selector(YBImagePickerDidFinishWithImages:)]) {
-            [self.delegate YBImagePickerDidFinishWithImages:resuletData];
+            [self.delegate YBImagePickerDidFinishWithImages:choosenImgArray.mutableCopy];
         }
+        
+        
     }];
 }
 - (void)showTableView {
@@ -399,4 +415,83 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     assetsLibrary = nil;
     group = nil;
 }
+#pragma mark - 图片相关
+//修正>2M的图片方向
+- (UIImage *)fixOrientation:(UIImage *)aImage {
+    
+    // No-op if the orientation is already correct
+    if (aImage.imageOrientation == UIImageOrientationUp)
+        return aImage;
+    
+    // We need to calculate the proper transformation to make the image upright.
+    // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    
+    switch (aImage.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, aImage.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+            
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, aImage.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        default:
+            break;
+    }
+    
+    switch (aImage.imageOrientation) {
+        case UIImageOrientationUpMirrored:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.width, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, aImage.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+        default:
+            break;
+    }
+    
+    // Now we draw the underlying CGImage into a new context, applying the transform
+    // calculated above.
+    CGContextRef ctx = CGBitmapContextCreate(NULL, aImage.size.width, aImage.size.height,
+                                             CGImageGetBitsPerComponent(aImage.CGImage), 0,
+                                             CGImageGetColorSpace(aImage.CGImage),
+                                             CGImageGetBitmapInfo(aImage.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (aImage.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx, CGRectMake(0,0,aImage.size.height,aImage.size.width), aImage.CGImage);
+            break;
+            
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0,0,aImage.size.width,aImage.size.height), aImage.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
+
 @end

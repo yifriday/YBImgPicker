@@ -11,9 +11,9 @@
 
 @optional
 - (void)YBImagePickerDidFinishWithImages:(NSArray *)imageArray;
-
 @end
 
 @interface YBImgPickerViewController : UIViewController
+
 - (void)showInViewContrller:(UIViewController *)vc choosenNum:(NSInteger)choosenNum delegate:(id<YBImgPickerViewControllerDelegate>)vcdelegate;
 @end
