@@ -67,13 +67,12 @@ static NSString * const tableReuseIdentifier = @"_tableCell";
     [self setNav];
 }
 - (void)setNav {
-    [YBPreHelper setNavState:NavState_White vc:self];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-//    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
-//    [self.navigationController.navigationBar setTitleTextAttributes:
-//     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica Neue" size:20], NSFontAttributeName, nil]];
-//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica Neue" size:20], NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     self.navigationItem.rightBarButtonItem.title = rightItemTitle;
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;;
@@ -98,7 +97,7 @@ static NSString * const tableReuseIdentifier = @"_tableCell";
     self.view.frame = [UIScreen mainScreen].bounds;
     self.navigationItem.titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
     titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [titleBtn setTitleColor:[YBPreHelper colorWithHexString:@"7a7a7a"] forState:UIControlStateNormal];
+    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     [titleBtn setImage:[UIImage imageNamed:@"YBimgPickerView.bundle/arrow"] forState:UIControlStateNormal];
     [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 78, 0, 0)];
