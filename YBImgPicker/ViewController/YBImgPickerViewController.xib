@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YBImgPickerViewController">
@@ -10,6 +10,8 @@
                 <outlet property="backView" destination="i7U-cs-2CF" id="Zfs-ZY-XmZ"/>
                 <outlet property="myCollectionView" destination="i5M-Pr-FkT" id="PNF-hb-ucp"/>
                 <outlet property="myTableView" destination="CAb-bJ-hM7" id="XPm-04-V0B"/>
+                <outlet property="tableViewHeightCon" destination="ylh-4i-ydY" id="bbc-yR-DJU"/>
+                <outlet property="tableViewTopCon" destination="laH-RW-QBP" id="978-WR-Dj1"/>
                 <outlet property="view" destination="ygg-LJ-MLR" id="l6R-QA-gaV"/>
             </connections>
         </placeholder>
@@ -37,7 +39,7 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CAb-bJ-hM7">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="368" id="ylh-4i-ydY"/>
                     </constraints>
@@ -58,7 +60,7 @@
                 <constraint firstAttribute="trailing" secondItem="CAb-bJ-hM7" secondAttribute="trailing" id="qdj-0j-2kC"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="124" y="-356"/>
+            <point key="canvasLocation" x="252" y="-348"/>
         </view>
     </objects>
 </document>

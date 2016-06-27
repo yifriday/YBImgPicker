@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,26 +16,35 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takePicture.png" translatesAutoresizingMaskIntoConstraints="NO" id="0BK-pE-xpp">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isChoosenY.png" translatesAutoresizingMaskIntoConstraints="NO" id="FV8-co-SBf">
-                        <rect key="frame" x="75" y="0.0" width="25" height="25"/>
+                    <view hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCJ-yt-Olx">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.20288254310344828" colorSpace="calibratedWhite"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isChoosenN.png" translatesAutoresizingMaskIntoConstraints="NO" id="FV8-co-SBf">
+                        <rect key="frame" x="76" y="0.0" width="24" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="FV8-co-SBf" secondAttribute="height" multiplier="1:1" id="Wey-1o-7Sz"/>
+                            <constraint firstAttribute="width" constant="24" id="h3Y-d4-otp"/>
+                            <constraint firstAttribute="height" constant="24" id="t5W-2v-6rF"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="DCJ-yt-Olx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4ve-5s-ANm"/>
                 <constraint firstAttribute="trailing" secondItem="0BK-pE-xpp" secondAttribute="trailing" id="Bvx-RE-XWk"/>
-                <constraint firstItem="FV8-co-SBf" firstAttribute="width" secondItem="0BK-pE-xpp" secondAttribute="height" multiplier="25:100" id="FDd-EE-zG3"/>
+                <constraint firstItem="DCJ-yt-Olx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Cx8-EO-Epr"/>
                 <constraint firstAttribute="bottom" secondItem="0BK-pE-xpp" secondAttribute="bottom" id="MKa-Nj-Y2E"/>
                 <constraint firstAttribute="trailing" secondItem="FV8-co-SBf" secondAttribute="trailing" id="MgW-TW-agc"/>
+                <constraint firstAttribute="trailing" secondItem="DCJ-yt-Olx" secondAttribute="trailing" id="aYj-gN-zjV"/>
                 <constraint firstItem="FV8-co-SBf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hXn-Q0-tgb"/>
                 <constraint firstItem="0BK-pE-xpp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kZP-3H-Gts"/>
                 <constraint firstItem="0BK-pE-xpp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kiC-Y8-7aZ"/>
+                <constraint firstAttribute="bottom" secondItem="DCJ-yt-Olx" secondAttribute="bottom" id="qYk-6e-KmL"/>
             </constraints>
             <size key="customSize" width="97" height="96"/>
             <connections>
+                <outlet property="backLayer" destination="DCJ-yt-Olx" id="2c5-iZ-Suf"/>
                 <outlet property="isChoosenImageView" destination="FV8-co-SBf" id="exf-wD-hAD"/>
                 <outlet property="mainImageView" destination="0BK-pE-xpp" id="qYW-kz-C9Y"/>
             </connections>
@@ -44,7 +52,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="isChoosenY.png" width="24" height="24"/>
+        <image name="isChoosenN.png" width="24" height="24"/>
         <image name="takePicture.png" width="308" height="308"/>
     </resources>
 </document>

@@ -17,26 +17,25 @@
 - (void)awakeFromNib {
     // Initialization code
 }
-- (void)layoutSubviews {
-    [self.titleLabel sizeToFit];
-    [self.numLabel sizeToFit];
-    [super layoutSubviews];
-}
 - (void)setAlbumImg:(UIImage *)albumImg {
+    _albumImg = albumImg;
     if (albumImg) {
         _albumImg = albumImg;
         self.albumImageView.image = _albumImg;
     }
 }
 - (void)setAlbumTitle:(NSString *)albumTitle {
+    _albumTitle = albumTitle;
     if (albumTitle.length) {
         _albumTitle = albumTitle;
         self.titleLabel.text = _albumTitle;
+        [self.titleLabel sizeToFit];
     }
 }
 - (void)setPhotoNum:(NSInteger)photoNum {
     _photoNum = photoNum;
     self.numLabel.text = [NSString stringWithFormat:@"%ld",(long)_photoNum];
+    [self.numLabel sizeToFit];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

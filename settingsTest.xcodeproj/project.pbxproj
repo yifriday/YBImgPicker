@@ -16,13 +16,17 @@
 		3D845FAA1B7482890083FC52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D845FA81B7482890083FC52 /* LaunchScreen.xib */; };
 		3D845FB61B7482890083FC52 /* settingsTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D845FB51B7482890083FC52 /* settingsTestTests.m */; };
 		3D845FC01B7482A80083FC52 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3D845FBF1B7482A80083FC52 /* Settings.bundle */; };
-		3D856F0A1B9E1167004A47A3 /* YBImgPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D856F011B9E1167004A47A3 /* YBImgPickerTableViewCell.m */; };
-		3D856F0C1B9E1167004A47A3 /* YBimgPickerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F031B9E1167004A47A3 /* YBimgPickerView.bundle */; };
-		3D856F0D1B9E1167004A47A3 /* YBImgPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D856F051B9E1167004A47A3 /* YBImgPickerViewCell.m */; };
-		3D856F0F1B9E1167004A47A3 /* YBImgPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D856F081B9E1167004A47A3 /* YBImgPickerViewController.m */; };
-		3D856F1A1B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F171B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib */; };
-		3D856F1B1B9E12AA004A47A3 /* YBImgPickerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F181B9E12AA004A47A3 /* YBImgPickerViewCell.xib */; };
-		3D856F1C1B9E12AA004A47A3 /* YBImgPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D856F191B9E12AA004A47A3 /* YBImgPickerViewController.xib */; };
+		A47183601D20CF5F0043C099 /* YBImgPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47183501D20CF5F0043C099 /* YBImgPickerTableViewCell.m */; };
+		A47183611D20CF5F0043C099 /* YBImgPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47183511D20CF5F0043C099 /* YBImgPickerTableViewCell.xib */; };
+		A47183621D20CF5F0043C099 /* YBImgPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47183531D20CF5F0043C099 /* YBImgPickerViewCell.m */; };
+		A47183631D20CF5F0043C099 /* YBImgPickerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47183541D20CF5F0043C099 /* YBImgPickerViewCell.xib */; };
+		A47183641D20CF5F0043C099 /* YBPreViewImgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47183561D20CF5F0043C099 /* YBPreViewImgViewCell.m */; };
+		A47183651D20CF5F0043C099 /* YBPreViewImgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47183571D20CF5F0043C099 /* YBPreViewImgViewCell.xib */; };
+		A47183661D20CF5F0043C099 /* YBImgPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A471835A1D20CF5F0043C099 /* YBImgPickerViewController.m */; };
+		A47183671D20CF5F0043C099 /* YBImgPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A471835B1D20CF5F0043C099 /* YBImgPickerViewController.xib */; };
+		A47183681D20CF5F0043C099 /* YBPreImgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A471835D1D20CF5F0043C099 /* YBPreImgViewController.m */; };
+		A47183691D20CF5F0043C099 /* YBPreImgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A471835E1D20CF5F0043C099 /* YBPreImgViewController.xib */; };
+		A471836A1D20CF5F0043C099 /* YBimgPickerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A471835F1D20CF5F0043C099 /* YBimgPickerView.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,16 +56,22 @@
 		3D845FB41B7482890083FC52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D845FB51B7482890083FC52 /* settingsTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = settingsTestTests.m; sourceTree = "<group>"; };
 		3D845FBF1B7482A80083FC52 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		3D856F001B9E1167004A47A3 /* YBImgPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerTableViewCell.h; sourceTree = "<group>"; };
-		3D856F011B9E1167004A47A3 /* YBImgPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerTableViewCell.m; sourceTree = "<group>"; };
-		3D856F031B9E1167004A47A3 /* YBimgPickerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YBimgPickerView.bundle; sourceTree = "<group>"; };
-		3D856F041B9E1167004A47A3 /* YBImgPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerViewCell.h; sourceTree = "<group>"; };
-		3D856F051B9E1167004A47A3 /* YBImgPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerViewCell.m; sourceTree = "<group>"; };
-		3D856F071B9E1167004A47A3 /* YBImgPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerViewController.h; sourceTree = "<group>"; };
-		3D856F081B9E1167004A47A3 /* YBImgPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerViewController.m; sourceTree = "<group>"; };
-		3D856F171B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerTableViewCell.xib; sourceTree = "<group>"; };
-		3D856F181B9E12AA004A47A3 /* YBImgPickerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerViewCell.xib; sourceTree = "<group>"; };
-		3D856F191B9E12AA004A47A3 /* YBImgPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerViewController.xib; sourceTree = "<group>"; };
+		A471834F1D20CF5F0043C099 /* YBImgPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerTableViewCell.h; sourceTree = "<group>"; };
+		A47183501D20CF5F0043C099 /* YBImgPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerTableViewCell.m; sourceTree = "<group>"; };
+		A47183511D20CF5F0043C099 /* YBImgPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerTableViewCell.xib; sourceTree = "<group>"; };
+		A47183521D20CF5F0043C099 /* YBImgPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerViewCell.h; sourceTree = "<group>"; };
+		A47183531D20CF5F0043C099 /* YBImgPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerViewCell.m; sourceTree = "<group>"; };
+		A47183541D20CF5F0043C099 /* YBImgPickerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerViewCell.xib; sourceTree = "<group>"; };
+		A47183551D20CF5F0043C099 /* YBPreViewImgViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPreViewImgViewCell.h; sourceTree = "<group>"; };
+		A47183561D20CF5F0043C099 /* YBPreViewImgViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPreViewImgViewCell.m; sourceTree = "<group>"; };
+		A47183571D20CF5F0043C099 /* YBPreViewImgViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBPreViewImgViewCell.xib; sourceTree = "<group>"; };
+		A47183591D20CF5F0043C099 /* YBImgPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBImgPickerViewController.h; sourceTree = "<group>"; };
+		A471835A1D20CF5F0043C099 /* YBImgPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBImgPickerViewController.m; sourceTree = "<group>"; };
+		A471835B1D20CF5F0043C099 /* YBImgPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBImgPickerViewController.xib; sourceTree = "<group>"; };
+		A471835C1D20CF5F0043C099 /* YBPreImgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YBPreImgViewController.h; sourceTree = "<group>"; };
+		A471835D1D20CF5F0043C099 /* YBPreImgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YBPreImgViewController.m; sourceTree = "<group>"; };
+		A471835E1D20CF5F0043C099 /* YBPreImgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBPreImgViewController.xib; sourceTree = "<group>"; };
+		A471835F1D20CF5F0043C099 /* YBimgPickerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YBimgPickerView.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +95,7 @@
 		3D845F8D1B7482890083FC52 = {
 			isa = PBXGroup;
 			children = (
-				3D856EFF1B9E1167004A47A3 /* YBImgPicker */,
+				A471834D1D20CF5F0043C099 /* YBImgPicker */,
 				3D845F981B7482890083FC52 /* settingsTest */,
 				3D845FB21B7482890083FC52 /* settingsTestTests */,
 				3D845F971B7482890083FC52 /* Products */,
@@ -145,21 +155,43 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3D856EFF1B9E1167004A47A3 /* YBImgPicker */ = {
+		A471834D1D20CF5F0043C099 /* YBImgPicker */ = {
 			isa = PBXGroup;
 			children = (
-				3D856F171B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib */,
-				3D856F181B9E12AA004A47A3 /* YBImgPickerViewCell.xib */,
-				3D856F191B9E12AA004A47A3 /* YBImgPickerViewController.xib */,
-				3D856F001B9E1167004A47A3 /* YBImgPickerTableViewCell.h */,
-				3D856F011B9E1167004A47A3 /* YBImgPickerTableViewCell.m */,
-				3D856F031B9E1167004A47A3 /* YBimgPickerView.bundle */,
-				3D856F041B9E1167004A47A3 /* YBImgPickerViewCell.h */,
-				3D856F051B9E1167004A47A3 /* YBImgPickerViewCell.m */,
-				3D856F071B9E1167004A47A3 /* YBImgPickerViewController.h */,
-				3D856F081B9E1167004A47A3 /* YBImgPickerViewController.m */,
+				A471834E1D20CF5F0043C099 /* ViewCell */,
+				A47183581D20CF5F0043C099 /* ViewController */,
+				A471835F1D20CF5F0043C099 /* YBimgPickerView.bundle */,
 			);
 			path = YBImgPicker;
+			sourceTree = "<group>";
+		};
+		A471834E1D20CF5F0043C099 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A471834F1D20CF5F0043C099 /* YBImgPickerTableViewCell.h */,
+				A47183501D20CF5F0043C099 /* YBImgPickerTableViewCell.m */,
+				A47183511D20CF5F0043C099 /* YBImgPickerTableViewCell.xib */,
+				A47183521D20CF5F0043C099 /* YBImgPickerViewCell.h */,
+				A47183531D20CF5F0043C099 /* YBImgPickerViewCell.m */,
+				A47183541D20CF5F0043C099 /* YBImgPickerViewCell.xib */,
+				A47183551D20CF5F0043C099 /* YBPreViewImgViewCell.h */,
+				A47183561D20CF5F0043C099 /* YBPreViewImgViewCell.m */,
+				A47183571D20CF5F0043C099 /* YBPreViewImgViewCell.xib */,
+			);
+			path = ViewCell;
+			sourceTree = "<group>";
+		};
+		A47183581D20CF5F0043C099 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A47183591D20CF5F0043C099 /* YBImgPickerViewController.h */,
+				A471835A1D20CF5F0043C099 /* YBImgPickerViewController.m */,
+				A471835B1D20CF5F0043C099 /* YBImgPickerViewController.xib */,
+				A471835C1D20CF5F0043C099 /* YBPreImgViewController.h */,
+				A471835D1D20CF5F0043C099 /* YBPreImgViewController.m */,
+				A471835E1D20CF5F0043C099 /* YBPreImgViewController.xib */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,13 +275,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D8074BC1B8F09AC0041B1DF /* ViewController.xib in Resources */,
+				A47183691D20CF5F0043C099 /* YBPreImgViewController.xib in Resources */,
+				A47183631D20CF5F0043C099 /* YBImgPickerViewCell.xib in Resources */,
+				A47183611D20CF5F0043C099 /* YBImgPickerTableViewCell.xib in Resources */,
+				A47183671D20CF5F0043C099 /* YBImgPickerViewController.xib in Resources */,
+				A471836A1D20CF5F0043C099 /* YBimgPickerView.bundle in Resources */,
 				3D845FC01B7482A80083FC52 /* Settings.bundle in Resources */,
-				3D856F0C1B9E1167004A47A3 /* YBimgPickerView.bundle in Resources */,
 				3D845FAA1B7482890083FC52 /* LaunchScreen.xib in Resources */,
+				A47183651D20CF5F0043C099 /* YBPreViewImgViewCell.xib in Resources */,
 				3D845FA71B7482890083FC52 /* Images.xcassets in Resources */,
-				3D856F1C1B9E12AA004A47A3 /* YBImgPickerViewController.xib in Resources */,
-				3D856F1A1B9E12AA004A47A3 /* YBImgPickerTableViewCell.xib in Resources */,
-				3D856F1B1B9E12AA004A47A3 /* YBImgPickerViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,13 +301,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D856F0A1B9E1167004A47A3 /* YBImgPickerTableViewCell.m in Sources */,
+				A47183601D20CF5F0043C099 /* YBImgPickerTableViewCell.m in Sources */,
 				3D845FA21B7482890083FC52 /* ViewController.m in Sources */,
 				3D845F9F1B7482890083FC52 /* AppDelegate.m in Sources */,
+				A47183661D20CF5F0043C099 /* YBImgPickerViewController.m in Sources */,
+				A47183641D20CF5F0043C099 /* YBPreViewImgViewCell.m in Sources */,
+				A47183681D20CF5F0043C099 /* YBPreImgViewController.m in Sources */,
+				A47183621D20CF5F0043C099 /* YBImgPickerViewCell.m in Sources */,
 				3D49DA8F1B74BAFC00CCB562 /* IPHelper.m in Sources */,
-				3D856F0D1B9E1167004A47A3 /* YBImgPickerViewCell.m in Sources */,
 				3D845F9C1B7482890083FC52 /* main.m in Sources */,
-				3D856F0F1B9E1167004A47A3 /* YBImgPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

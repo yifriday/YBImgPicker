@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "IPHelper.h"
 #import "YBImgPickerViewController.h"
-@interface ViewController ()<YBImgPickerViewControllerDelegate>{
+@interface ViewController ()<YBImgPickerViewControllerDelegate>
+{
+    NSMutableDictionary * choosenDic;
 }
 
 @end
@@ -46,16 +48,13 @@
     
 }
 - (IBAction)gotoNextView:(id)sender {
-    YBImgPickerViewController * next = [[YBImgPickerViewController alloc]init];
-    [next showInViewContrller:self choosenNum:0 delegate:self];
+    YBImgPickerViewController * next = [[YBImgPickerViewController alloc]initWithChoosenImgDic:choosenDic delegate:self];
+    [next showInViewContrller:self];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)YBImagePickerDidFinishWithImages:(NSDictionary *)choosenImgDic {
+    choosenDic = choosenImgDic.mutableCopy;
+    //返回的是选中的图片的dictionary，key为asset，value为uiimage
 }
-- (void)YBImagePickerDidFinishWithImages:(NSArray *)imageArray {
-    for (UIImage * image in imageArray) {
-        
-    }
-}
+
 @end

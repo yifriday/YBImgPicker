@@ -10,12 +10,22 @@
 @interface YBImgPickerViewCell ()
 @property (nonatomic , strong) IBOutlet UIImageView * mainImageView;
 @property (nonatomic , strong) IBOutlet UIImageView * isChoosenImageView;
+@property (nonatomic , strong) IBOutlet UIView * backLayer;
 
 @end
 @implementation YBImgPickerViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+    UITapGestureRecognizer * isChoosenImageViewTapG = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(isChoosenImageViewTap)];
+    self.isChoosenImageView.userInteractionEnabled = YES;
+    [self.isChoosenImageView addGestureRecognizer:isChoosenImageViewTapG];
+    
+}
+- (void)isChoosenImageViewTap {
+    if ([self.delegate respondsToSelector:@selector(cellIsChoosen:)]) {
+        [self.delegate cellIsChoosen:self];
+    }
 }
 - (void)setContentImg:(UIImage *)contentImg {
     if (contentImg) {
@@ -30,8 +40,9 @@
             self.isChoosenImageView.image = [UIImage imageNamed:@"YBimgPickerView.bundle/isChoosenY"];
             
         }else {
-            self.isChoosenImageView.image = nil;
+            self.isChoosenImageView.image = [UIImage imageNamed:@"YBimgPickerView.bundle/isChoosenN"];
         }
+        self.backLayer.hidden = !isChoosen;
         self.isChoosenImageView.transform = CGAffineTransformMakeScale (1.1,1.1);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 animations:^{

@@ -9,82 +9,88 @@
 #define maxnum_of_one_line 3
 #define itemHeight ( CGRectGetWidth([UIScreen mainScreen].bounds) - (maxnum_of_one_line + 1) * empty_width ) / maxnum_of_one_line
 #define item_Size CGSizeMake(itemHeight , itemHeight)
-#define rightItemTitle [NSString stringWithFormat:@"完成 %ld/%ld",(long)choosenCount,(long)photoCounts]
+#define rightItemTitle [NSString stringWithFormat:@"完成 %ld/%ld",(long)isChoosenDic.count,(long)photoCounts]
+
 #define tableCellH 70
-#define tableH MIN(CGRectGetHeight([UIScreen mainScreen].bounds) - 64, tableCellH * tableData.count);
+
+
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
+
 #import "YBImgPickerViewController.h"
 #import "YBImgPickerViewCell.h"
 #import "YBImgPickerTableViewCell.h"
-const NSInteger photoCounts = 9;
-@interface YBImgPickerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
+#import "YBPreImgViewController.h"
+
+
+@interface YBImgPickerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,YBImgPickerViewCellDelegate,YBPreImgViewControllerDelegate>
+{
     NSMutableArray * tableData;
     NSMutableArray * colletionData;
-    NSMutableArray * originImgData;
-    NSMutableDictionary * choosenImgArray;
     NSMutableDictionary * isChoosenDic;
-    NSInteger choosenCount;
     BOOL isShowTable;
     UIViewController * preVC;
 }
 @property (nonatomic , strong) IBOutlet UICollectionView * myCollectionView;
 @property (nonatomic , strong) IBOutlet UITableView * myTableView;
 @property (nonatomic , strong) IBOutlet UIView * backView;
+@property (nonatomic , strong) IBOutlet NSLayoutConstraint * tableViewHeightCon;
+@property (nonatomic , strong) IBOutlet NSLayoutConstraint * tableViewTopCon;
 @property (nonatomic , strong) UINavigationController *nav;
 @property (nonatomic , strong) UIButton * titleBtn;
-@property (nonatomic , strong) id <YBImgPickerViewControllerDelegate> delegate;
+@property (nonatomic , weak) id <YBImgPickerViewControllerDelegate> delegate;
 @property (nonatomic , strong) ALAssetsLibrary *assetsLibrary;
-@property (nonatomic , strong) ALAssetsGroup * group;
-
 @end
 
 @implementation YBImgPickerViewController
 @synthesize myTableView,myCollectionView,backView,titleBtn;
-@synthesize assetsLibrary,group;
+@synthesize assetsLibrary;
 @synthesize nav;
-static NSString * const colletionReuseIdentifier = @"collectionCell";
-static NSString * const tableReuseIdentifier = @"tableCell";
-- (instancetype)init {
+static NSString * const colletionReuseIdentifier = @"_collectionCell";
+static NSString * const tableReuseIdentifier = @"_tableCell";
+- (instancetype)initWithChoosenImgDic:(NSDictionary *)choosenImgDic delegate:(id<YBImgPickerViewControllerDelegate>)vcdelegate {
     self = [self initWithNibName:@"YBImgPickerViewController" bundle:nil];
-    nav = [[UINavigationController alloc] initWithRootViewController:self];
-    
-    tableData = [[NSMutableArray alloc]init];
-    colletionData = [[NSMutableArray alloc]init];
-    originImgData = [[NSMutableArray alloc]init];
-    assetsLibrary = [[ALAssetsLibrary alloc]init];
-    choosenImgArray = [[NSMutableDictionary alloc]init];
-    isChoosenDic = [[NSMutableDictionary alloc]init];
-    choosenCount = 0;
-    [self getTableDate];
-    [self initDefaultView];
+    if (self) {
+        nav = [[UINavigationController alloc] initWithRootViewController:self];
+        tableData = [[NSMutableArray alloc]init];
+        colletionData = [[NSMutableArray alloc]init];
+        assetsLibrary = [[ALAssetsLibrary alloc]init];
+        self.delegate = vcdelegate;
+        isChoosenDic = [NSMutableDictionary dictionaryWithDictionary:choosenImgDic];
+    }
     return self;
 }
 
-// 第一次进来的时候显示已经存在的图片个数
-- (instancetype)initWithNumber:(NSInteger)number {
-    self = [self initWithNibName:@"YBImgPickerViewController" bundle:nil];
-    nav = [[UINavigationController alloc] initWithRootViewController:self];
-    
-    tableData = [[NSMutableArray alloc]init];
-    colletionData = [[NSMutableArray alloc]init];
-    originImgData = [[NSMutableArray alloc]init];
-    assetsLibrary = [[ALAssetsLibrary alloc]init];
-    choosenImgArray = [[NSMutableDictionary alloc]init];
-    isChoosenDic = [[NSMutableDictionary alloc]init];
-    choosenCount = number;
-    [self getTableDate];
-    [self initDefaultView];
-    return self;
-}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self setNav];
+}
+- (void)setNav {
+    [YBPreHelper setNavState:NavState_White vc:self];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+//    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+//    [self.navigationController.navigationBar setTitleTextAttributes:
+//     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Helvetica Neue" size:20], NSFontAttributeName, nil]];
+//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     self.navigationItem.rightBarButtonItem.title = rightItemTitle;
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;;
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Register cell classes
+    
     [myCollectionView registerNib:[UINib nibWithNibName:@"YBImgPickerViewCell" bundle:nil] forCellWithReuseIdentifier:colletionReuseIdentifier];
     [myTableView registerNib:[UINib nibWithNibName:@"YBImgPickerTableViewCell" bundle:nil] forCellReuseIdentifier:tableReuseIdentifier];
+    
+    
+    [self getTableData];
+    [self initDefaultView];
     
 }
 - (void)initDefaultView {
@@ -92,12 +98,15 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     self.view.frame = [UIScreen mainScreen].bounds;
     self.navigationItem.titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
     titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [titleBtn setTitle:@"相机胶卷" forState:UIControlStateNormal];
-    [titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [titleBtn setTitleColor:[YBPreHelper colorWithHexString:@"7a7a7a"] forState:UIControlStateNormal];
+    
     [titleBtn setImage:[UIImage imageNamed:@"YBimgPickerView.bundle/arrow"] forState:UIControlStateNormal];
     [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 78, 0, 0)];
     [titleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -35, 0, 0)];
     [titleBtn setFrame:self.navigationItem.titleView.frame];
+//    [titleBtn.titleLabel setFont:[UIFont fontWithName:FONT_NAME size:20]];
+    [titleBtn.titleLabel setFont:[UIFont systemFontOfSize:20.]];
+    [titleBtn setTitle:@"相册胶卷" forState:UIControlStateNormal];
     [titleBtn sizeToFit];
     titleBtn.center = self.navigationItem.titleView.center;
     
@@ -105,17 +114,18 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     [self.navigationItem.titleView addSubview:titleBtn];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(hide)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:rightItemTitle style:UIBarButtonItemStyleDone target:self action:@selector(save)];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    //    self.navigationItem.rightBarButtonItem.enabled = NO;
     //tableView
     myTableView.rowHeight = tableCellH;
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     myTableView.delegate = self;
     myTableView.dataSource = self;
     myTableView.hidden = YES;
+    myTableView.scrollsToTop = NO;
     //collectionView
     UICollectionViewFlowLayout * mycollectionViewLayout = [[UICollectionViewFlowLayout alloc]init];
     mycollectionViewLayout.minimumInteritemSpacing = empty_width;
-    mycollectionViewLayout.minimumLineSpacing = empty_width;
+    mycollectionViewLayout.minimumLineSpacing = empty_width + 2;
     mycollectionViewLayout.itemSize = item_Size;
     mycollectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     mycollectionViewLayout.sectionInset = UIEdgeInsetsMake(empty_width + 2, empty_width , empty_width + 2, empty_width);
@@ -130,78 +140,61 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     [backView addGestureRecognizer:backViewTap];
 }
 - (void)setTableViewHeight {
-    for(NSLayoutConstraint * constraint in myTableView.constraints){
-        if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeHeight) {
-            constraint.constant = tableH;
-        }
-    }
-    for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
-        if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-            constraint.constant = -tableH;
-        }
-    }
-    [self.view layoutIfNeeded];
+    self.tableViewHeightCon.constant = [self getTabelViewHeight];
+    self.tableViewTopCon.constant = -[self getTabelViewHeight];
+    //    [self.view layoutIfNeeded];
 }
-- (void)getTableDate {
-    
+- (void)getTableData {
+    __weak typeof(self) weakSelf = self;
     void (^assetsGroupsEnumerationBlock)(ALAssetsGroup *, BOOL *) = ^(ALAssetsGroup *assetsGroup, BOOL *stop) {
+        
         if(assetsGroup) {
             [assetsGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
-            NSMutableArray * isChoosenArray = [[NSMutableArray alloc]init];
             if(assetsGroup.numberOfAssets > 0) {
-                [tableData addObject:assetsGroup];
-                for (int i = 0; i<assetsGroup.numberOfAssets; i++) {
-                    [isChoosenArray addObject:[NSNumber numberWithBool:NO]];
-                }
-                [isChoosenDic setObject:isChoosenArray forKey:[assetsGroup valueForProperty:ALAssetsGroupPropertyName]];
-                [self setTableViewHeight];
+                [tableData insertObject:assetsGroup atIndex:0];
+            }
+        }else {
+            if (tableData.count) {
+                
+                [weakSelf setTableViewHeight];
+                [weakSelf getCollectionData:0];
+                
+                [myTableView reloadData];
+                [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+                
             }
         }
-        [myTableView reloadData];
-        [self getCollectionData:0];
-        [myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     };
+    
+    
     
     void (^assetsGroupsFailureBlock)(NSError *) = ^(NSError *error) {
         NSLog(@"Error: %@", [error localizedDescription]);
     };
-    
-    // Enumerate Camera Roll
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Photo Stream
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupPhotoStream usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Album
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Event
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupEvent usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Faces
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupFaces usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
+    // ALAssetsGroupAll
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
+
 }
 - (void)getCollectionData:(NSInteger)tag {
     if (colletionData.count) {
         [colletionData removeAllObjects];
     }
-    if (originImgData.count) {
-        [originImgData removeAllObjects];
-    }
     [colletionData addObject:[UIImage imageNamed:@"YBimgPickerView.bundle/takePicture"]];
     if (tableData.count) {
-        group = [tableData objectAtIndex:tag];
-        [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        
+        ALAssetsGroup * assetsGroup = [tableData objectAtIndex:tag];
+        [assetsGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
             if (result) {
                 NSString *type=[result valueForProperty:ALAssetPropertyType];
                 if ([type isEqualToString:ALAssetTypePhoto]) {
-                    [colletionData addObject:[UIImage imageWithCGImage:[result aspectRatioThumbnail]]];
-                    [originImgData addObject:result];
+                    [colletionData insertObject:result atIndex:1];
                 }
+            }else {
                 [myCollectionView reloadData];
+                
             }
         }];
+        
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -225,61 +218,87 @@ static NSString * const tableReuseIdentifier = @"tableCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     YBImgPickerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:colletionReuseIdentifier forIndexPath:indexPath];
-    cell.contentImg = [colletionData objectAtIndex:indexPath.item];
-    NSArray * isChoosenArray = [isChoosenDic objectForKey:[group valueForProperty:ALAssetsGroupPropertyName]];
+    cell.delegate = self;
     if (indexPath.item != 0) {
+        ALAsset * asset = [colletionData objectAtIndex:indexPath.item];
+        BOOL assetIsChoosen;
+        if ([isChoosenDic objectForKey:[asset description]]) {
+            assetIsChoosen = YES;
+        }
+        else {
+            assetIsChoosen = NO;
+        }
+        cell.contentImg = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
         cell.isChoosenImgHidden = NO;
-        cell.isChoosen = [[isChoosenArray objectAtIndex:indexPath.item - 1]boolValue];
+        cell.isChoosen = assetIsChoosen;
     }else {
+        cell.contentImg = [colletionData objectAtIndex:indexPath.item];
         cell.isChoosenImgHidden = YES;
     }
-    // Configure the cell
     return cell;
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) {
-        if (choosenCount >= photoCounts) {
+        if (isChoosenDic.count >= photoCounts) {
             return;
         }
-        UIImagePickerController * imagePicker = [[UIImagePickerController alloc]init];
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.delegate = self;
-        imagePicker.showsCameraControls  = YES;
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied)
+            {
+                //无权限
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"未设置使用相机权限" message:@"请前往设置页面设置" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+                return;
+                
+            }
+            UIImagePickerController * imagePicker = [[UIImagePickerController alloc]init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.delegate = self;
+            imagePicker.showsCameraControls  = YES;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }else {
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"请检查相机是否完好" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+        
         
     }else {
-        
-        NSInteger  tag = indexPath.item - 1;
-        
-        NSMutableArray * isChoosenArray = [isChoosenDic objectForKey:[group valueForProperty:ALAssetsGroupPropertyName]];
-        BOOL isChoosen = [[isChoosenArray objectAtIndex:tag]boolValue];
-        ALAsset * asset = [originImgData objectAtIndex:tag];
-        
-        if (!isChoosen) {
-            if (choosenCount >= photoCounts) {
-                return;
-            }
-            choosenCount += 1;
-            [choosenImgArray setObject:asset forKey:indexPath];
-        }else {
-            choosenCount -= 1;
-            [choosenImgArray removeObjectForKey:indexPath];
-        }
-        self.navigationItem.rightBarButtonItem.title = rightItemTitle;
-        if (choosenImgArray.count) {
-            self.navigationItem.rightBarButtonItem.enabled = YES;
-        }else {
-            self.navigationItem.rightBarButtonItem.enabled = NO;
-        }
-        
-        [isChoosenArray replaceObjectAtIndex:tag withObject:[NSNumber numberWithBool:!isChoosen]];
-        [isChoosenDic setObject:isChoosenArray forKey:[group valueForProperty:ALAssetsGroupPropertyName]];
-        
-        [collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
-        
+        // 放大预览
+        NSMutableArray * cData = [[NSMutableArray alloc]initWithArray:colletionData];
+        [cData removeObjectAtIndex:0];
+        NSIndexPath * index = [NSIndexPath indexPathForItem:indexPath.item - 1 inSection:0];
+        YBPreImgViewController * preViewController = [[YBPreImgViewController alloc]initWithColletionData:cData isChoosenDic:isChoosenDic curIndex:index delegate:self];
+        [preViewController showInViewContrller:self];
     }
+}
+- (void)cellIsChoosen:(YBImgPickerViewCell *)cell {
+    NSIndexPath * indexPath = [self.myCollectionView indexPathForCell:cell];
+    NSInteger  tag = indexPath.item;
+    ALAsset * asset = [colletionData objectAtIndex:tag];
+    BOOL isChoosen;
+    if ([isChoosenDic objectForKey:[asset description]]) {
+        isChoosen = YES;
+    }
+    else {
+        isChoosen = NO;
+    }
+    
+    if (!isChoosen) {
+        if (isChoosenDic.count >= photoCounts) {
+            return;
+        }
+        UIImage * image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+        image = [self fixOrientation:image];
+        [isChoosenDic setObject:[UIImage imageWithData:UIImageJPEGRepresentation(image, 0.7)] forKey:[asset description]];
+    }else {
+        [isChoosenDic removeObjectForKey:[asset description]];
+    }
+    
+    self.navigationItem.rightBarButtonItem.title = rightItemTitle;
+    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
 }
 #pragma mark UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -308,90 +327,83 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     UIImage * image = [[UIImage alloc]init];
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (image) {
-
+        UIImage * newOriImg = [self fixOrientation:image];
         // 保存图片到相册中
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
         {
-            UIImageWriteToSavedPhotosAlbum(image,self,nil, NULL);
-            [choosenImgArray setObject:[self fixOrientation:image] forKey:@"camare"];
+            //            UIImageWriteToSavedPhotosAlbum(image,self,nil, NULL);
+            [isChoosenDic setObject:[UIImage imageWithData:UIImageJPEGRepresentation(newOriImg, 0.7)] forKey:@"Camera"];
         }
-        
+        __weak typeof(self) weakSelf = self;
         [picker dismissViewControllerAnimated:NO completion:^() {
-            [self save];
+            [weakSelf save];
         }];
         
     }
 }
 
 #pragma mark self
-- (void)showInViewContrller:(UIViewController *)vc choosenNum:(NSInteger)choosenNum delegate:(id<YBImgPickerViewControllerDelegate>)vcdelegate{
+- (void)showInViewContrller:(UIViewController *)vc {
+
     preVC = vc;
-    self.delegate = vcdelegate;
-    choosenCount = choosenNum;
-    
     [vc presentViewController:nav animated:YES completion:nil];
     
 }
 - (void)hide{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    __weak typeof(self) weakSelf = self;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [weakSelf mydealloc];
+    }];
     
 }
 - (void)save {
+    __weak typeof(self) weakSelf = self;
     [self dismissViewControllerAnimated:YES completion:^{
-        
-        if ([self.delegate respondsToSelector:@selector(YBImagePickerDidFinishWithImages:)]) {
-            [self.delegate YBImagePickerDidFinishWithImages:choosenImgArray.copy];
+        if ([weakSelf.delegate respondsToSelector:@selector(YBImagePickerDidFinishWithImages:)]) {
+            [weakSelf.delegate YBImagePickerDidFinishWithImages:isChoosenDic.copy];
+            [weakSelf mydealloc];
         }
-        
-        
     }];
+}
+- (void)YBPreViewImgViewDidFinishWithImages:(NSDictionary *)choosenImgDic {
+    isChoosenDic = choosenImgDic.copy;
+    [self save];
+}
+- (void)YBPreViewImgViewBackToPreVc:(NSIndexPath *)index {
+    [self.myCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index.row + 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
 }
 - (void)showTableView {
     myTableView.hidden = NO;
     backView.userInteractionEnabled = YES;
+    __weak typeof(self) weakSelf = self;
     if (isShowTable) {
-        [UIView animateWithDuration:0.45 animations:^{
-            for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
-                if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-                    constraint.constant += 5;
-                }
-            }
+        self.tableViewTopCon.constant += 5;
+        [UIView animateWithDuration:0.25 animations:^{
             backView.alpha = 0;
-            [self.view layoutIfNeeded];
+            [weakSelf.view layoutIfNeeded];
             
         } completion:^(BOOL finished) {
             titleBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+            self.tableViewTopCon.constant = - [self getTabelViewHeight];
             [UIView animateWithDuration:0.35 animations:^{
-                for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
-                    if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-                        constraint.constant = -tableH;
-                    }
-                }
-                [self.view layoutIfNeeded];
+                [weakSelf.view layoutIfNeeded];
             } completion:^(BOOL finished) {
                 backView.userInteractionEnabled = NO;
                 isShowTable = !isShowTable;
             }];
         }];
-    }else {
-        [UIView animateWithDuration:0.45 animations:^{
-            for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
-                if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-                    constraint.constant = 64 + 5;
-                }
-            }
+    }
+    else {
+        self.tableViewTopCon.constant = 64 + 5;
+        [UIView animateWithDuration:0.25 animations:^{
             backView.alpha = 1;
-            [self.view layoutIfNeeded];
+            [weakSelf.view layoutIfNeeded];
             
         } completion:^(BOOL finished) {
             titleBtn.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+            self.tableViewTopCon.constant = 64;
             [UIView animateWithDuration:0.35 animations:^{
-                for(NSLayoutConstraint * constraint in myTableView.superview.constraints){
-                    if (constraint.firstItem == myTableView && constraint.firstAttribute == NSLayoutAttributeTop) {
-                        constraint.constant = 64;
-                    }
-                }
-                [self.view layoutIfNeeded];
+                [weakSelf.view layoutIfNeeded];
             } completion:^(BOOL finished) {
                 backView.userInteractionEnabled = YES;
                 isShowTable = !isShowTable;
@@ -399,11 +411,9 @@ static NSString * const tableReuseIdentifier = @"tableCell";
         }];
     }
 }
-- (void)dealloc {
+- (void)mydealloc {
     tableData = nil;
     colletionData = nil;
-    originImgData = nil;
-    choosenImgArray = nil;
     isChoosenDic = nil;
     
     myCollectionView = nil;
@@ -413,7 +423,10 @@ static NSString * const tableReuseIdentifier = @"tableCell";
     titleBtn = nil;
     _delegate = nil;
     assetsLibrary = nil;
-    group = nil;
+}
+
+- (CGFloat)getTabelViewHeight {
+    return MIN(CGRectGetHeight([UIScreen mainScreen].bounds) - 64, tableCellH * tableData.count);
 }
 #pragma mark - 图片相关
 //修正>2M的图片方向

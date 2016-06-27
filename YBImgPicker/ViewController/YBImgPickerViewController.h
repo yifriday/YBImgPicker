@@ -10,10 +10,12 @@
 @protocol YBImgPickerViewControllerDelegate <NSObject>
 
 @optional
-- (void)YBImagePickerDidFinishWithImages:(NSArray *)imageArray;
+- (void)YBImagePickerDidFinishWithImages:(NSDictionary *)choosenImgDic;
 @end
 
 @interface YBImgPickerViewController : UIViewController
+- (instancetype)initWithChoosenImgDic:(NSDictionary *)choosenImgDic delegate:(id<YBImgPickerViewControllerDelegate>)vcdelegate;
 
-- (void)showInViewContrller:(UIViewController *)vc choosenNum:(NSInteger)choosenNum delegate:(id<YBImgPickerViewControllerDelegate>)vcdelegate;
+- (void)showInViewContrller:(UIViewController *)vc;
+
 @end
